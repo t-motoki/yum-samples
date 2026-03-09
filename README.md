@@ -64,4 +64,6 @@ docker compose up -d voicevox
 
 ## チャンネル
 
+[ゆる系エンジニアの手記](https://www.youtube.com/channel/UCE1rHqZ5UvXkc0ZBLNiX6bA)
+
 コードへの質問・フィードバックは Issue または動画のコメント欄でどうぞ。
