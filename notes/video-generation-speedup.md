@@ -1,72 +1,114 @@
-# 動画生成の高速化 — 27分から10分以内へ
+# 動画生成の高速化 — マルチプロセス化と VOICEVOX ロードバランシング
 
-動画生成パイプラインが ep3.1 のテロップアニメーション実装後に 27分55秒 かかるようになった問題と、その解決方法を記録します。
+動画生成パイプラインが長尺動画で10分以上かかっていた問題に対して、
+2つのアプローチで改善した記録です。
 
 ## 問題
 
-ep3.1 でテロップフェードインアニメーションを実装した際、全シーンを `VideoClip` に統一した。
-その結果、アニメーションのないシーンでも毎フレーム `render()` が呼ばれるようになり、
-短〜中尺の動画でも生成に 27分以上 かかるようになった。
+動画生成パイプラインは主に2つのボトルネックがある。
+
+1. **動画レンダリング（CPU バウンド）**: Pillow + MoviePy によるフレーム生成
+2. **音声合成（I/O バウンド）**: VOICEVOX API へのリクエストがシーン数分だけ直列で走る
+
+---
+
+## 対策1: 動画生成処理を4プロセスへ移行
+
+動画レンダリングは CPU バウンドなタスクのため、マルチプロセス化が有効。
+
+Python の `multiprocessing` を使い、シーンを4プロセスに分割して並列レンダリングする。
+
+```python
+from multiprocessing import Pool
+
+def render_scene(scene):
+    # Pillow + MoviePy でシーンを動画クリップに変換
+    ...
+
+with Pool(processes=4) as pool:
+    clips = pool.map(render_scene, scenes)
+```
+
+**注意点:**
+
+- `Pool` は `if __name__ == "__main__":` ブロック内で起動する（Windows / macOS での二重起動防止）
+- MoviePy のオブジェクトはプロセス間で共有できないため、各プロセスで独立して生成する
+- 最終的な `concatenate_videoclips()` はシングルプロセスで行う（順序保証のため）
+
+---
+
+## 対策2: VOICEVOX マルチコンテナ + ロードバランサーで音声合成を並列化
+
+VOICEVOX は1コンテナにつき同時リクエストを1つしか処理できない。
+シーン数が多い動画では音声合成だけで数分かかる。
+
+### 構成
 
 ```text
-非機能要件: 動画生成は 10分以内
-実測値:     27分55秒（ep3.1 実装直後）
+音声合成リクエスト
+      ↓
+ Nginx（ロードバランサー）
+  ├── VOICEVOX コンテナ 1（:50021）
+  ├── VOICEVOX コンテナ 2（:50022）
+  ├── VOICEVOX コンテナ 3（:50023）
+  └── VOICEVOX コンテナ 4（:50024）
 ```
 
-## 原因分析
+### docker-compose の構成イメージ
 
-MoviePy には2種類のクリップがある。
+```yaml
+services:
+  voicevox1:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    ports: ["50021:50021"]
 
-| クリップ種別 | 動作 | 処理コスト |
-| --- | --- | --- |
-| `ImageClip` | 静止画として保持。フレームを毎回生成しない | 低 |
-| `VideoClip` | フレーム生成関数を毎フレーム呼び出す | 高 |
+  voicevox2:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    ports: ["50022:50021"]
 
-ep3.1 以前は「アニメーションあり → `VideoClip`、なし → `ImageClip`」と分岐していたが、
-テロップフェードを実装する際にすべて `VideoClip` に統一してしまった。
+  # voicevox3, voicevox4 も同様
 
-```python
-# before: 分岐あり（高速）
-if scene.has_animation:
-    clip = VideoClip(make_frame, duration=duration)
-else:
-    clip = ImageClip(frame).set_duration(duration)
-
-# after（問題のある実装）: 全シーン VideoClip（低速）
-clip = VideoClip(make_frame, duration=duration)
+  nginx:
+    image: nginx:alpine
+    ports: ["50100:80"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
 ```
 
-## 解決策
+### nginx.conf（ラウンドロビン）
 
-`fade_sec == 0.0` のシーンは `ImageClip` にフォールバックする条件分岐を復活させた。
+```nginx
+upstream voicevox_cluster {
+    server voicevox1:50021;
+    server voicevox2:50021;
+    server voicevox3:50021;
+    server voicevox4:50021;
+}
 
-```python
-if fade_sec > 0:
-    # テロップフェードあり → 毎フレーム描画が必要
-    clip = VideoClip(make_frame, duration=duration)
-else:
-    # テロップフェードなし → 静止画で十分
-    frame = render_static_frame(scene)
-    clip = ImageClip(frame).with_duration(duration)
+server {
+    listen 80;
+    location / {
+        proxy_pass http://voicevox_cluster;
+    }
+}
 ```
 
-ポイントは「`fade_sec > 0` かどうか」だけで判断できること。
-台本で `<!-- config: telop_fade=none -->` または未設定のシーンはすべて `ImageClip` になる。
+アプリ側は `VOICEVOX_URL=http://localhost:50100` に向けるだけ。
+コンテナ数を変えても、アプリコードの変更は不要。
+
+---
 
 ## 結果
 
-| 条件 | 生成時間 |
-| --- | --- |
-| 修正前（全シーン VideoClip） | 約28分 |
-| 修正後（フォールバックあり） | 短〜中尺は10分以内 |
-| 長尺動画 | 依然10分超過（未解決） |
+| 条件 | 改善前 | 改善後 |
+| --- | --- | --- |
+| 音声合成（20シーン） | 直列: 約4分 | 並列4台: 約1分 |
+| 動画レンダリング | シングルプロセス: 約24分 | 4プロセス: 約6〜8分 |
 
-短〜中尺動画（〜10シーン程度）は非機能要件（10分以内）を達成。
-長尺動画については並列レンダリングなどの追加対応が必要（未着手）。
+---
 
 ## 教訓
 
-- `ImageClip` と `VideoClip` の使い分けは MoviePy のパフォーマンスに直結する
-- 「全部 VideoClip にしておけば安全」はアンチパターン
-- アニメーション実装時は必ず「アニメーションなしのシーンへの影響」を確認する
-- 処理時間の非機能要件を先に決めておくと、実装の方針が明確になる
+- VOICEVOX は1コンテナ1リクエストの制約があるため、並列化はロードバランサーで行うのが素直
+- 動画レンダリングは CPU バウンドなのでマルチプロセスが効く（マルチスレッドは GIL の影響で効果薄）
+- ロードバランサーを挟むことで、コンテナ数を増減してもアプリ側の変更がゼロになる
