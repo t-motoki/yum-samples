@@ -40,6 +40,7 @@
 | [ImageClip と VideoClip の使い分け](./notes/imageclip-vs-videoclip.md) | MoviePy でアニメーションなしのシーンを高速化するパターン |
 | [台本ディレクティブの設計](./notes/script-directive-design.md) | Markdown コメントで動画演出を制御する設計とパース実装 |
 | [コードスクロール演出](./notes/code-scroll-animation.md) | 全体→キーの一行に絞る二段構成の実装パターン |
+| [WSL2 メモリクラッシュと .wslconfig](./notes/wsl2-memory-crash-and-wslconfig.md) | Wav2Lip 処理中の WSL2 VM クラッシュを .wslconfig で根本解決した記録 |
 
 ---
 
