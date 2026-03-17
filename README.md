@@ -25,6 +25,7 @@
 | ep2.2 | さばきゃん登場 — 聞いてくれる人がいるだけで、こんなに違う | Pillow（2キャラサムネイル）/ VOICEVOX | [ep2.2_sabacyan-introduction](./episodes/ep2.2_sabacyan-introduction/) |
 | ep3.2 | BGMフェードイン・フェードアウト — 台本から音量曲線を制御する | MoviePy | [ep3.2_bgm-fade](./episodes/ep3.2_bgm-fade/) |
 | ep3.3 | Wav2Lip でリップシンク — アニメキャラに口パクをつける | Wav2Lip / PyTorch | [ep3.3_wav2lip-lipsync](./episodes/ep3.3_wav2lip-lipsync/) |
+| ep3.4.1 | AIで静止画を動かす実験、13分待って気づいたこと | SadTalker / PyTorch | [ep3.4.1_sadtalker-cpu](./episodes/ep3.4.1_sadtalker-cpu/) |
 
 ---
 
