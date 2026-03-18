@@ -44,6 +44,8 @@
 | [台本ディレクティブの設計](./notes/script-directive-design.md) | Markdown コメントで動画演出を制御する設計とパース実装 |
 | [コードスクロール演出](./notes/code-scroll-animation.md) | 全体→キーの一行に絞る二段構成の実装パターン |
 | [WSL2 メモリクラッシュと .wslconfig](./notes/wsl2-memory-crash-and-wslconfig.md) | Wav2Lip 処理中の WSL2 VM クラッシュを .wslconfig で根本解決した記録 |
+| [リップシンクツール選定: 映像出力型 vs データ出力型](./notes/lipsync-data-vs-video-output.md) | Rhubarb vs Wav2Lip — 既存パイプラインへの統合コストが変わる設計の考え方 |
+| [CPU・アニメ向けリップシンクツール調査記録](./notes/cpu-anime-lipsync-tool-survey.md) | THA4・MuseTalk・LatentSync・Rhubarb を比較した選定記録と教訓 |
 
 ---
 
