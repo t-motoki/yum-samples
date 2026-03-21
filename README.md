@@ -27,6 +27,8 @@
 | ep3.3 | Wav2Lip でリップシンク — アニメキャラに口パクをつける | Wav2Lip / PyTorch | [ep3.3_wav2lip-lipsync](./episodes/ep3.3_wav2lip-lipsync/) |
 | ep3.4.1 | AIで静止画を動かす実験、13分待って気づいたこと | SadTalker / PyTorch | [ep3.4.1_sadtalker-cpu](./episodes/ep3.4.1_sadtalker-cpu/) |
 | ep3.4.2 | CPU・無料でアニメキャラの口を動かす — Rhubarb Lip Sync 調査記録 | Rhubarb Lip Sync | [ep3.4.2_rhubarb-lipsync](./episodes/ep3.4.2_rhubarb-lipsync/) |
+| ep3.4.3 | 口だけ動いて体が固まる問題 — 表情補間とアイドルアニメーションで人形感を解消する | Pillow | [ep3.4.3_expression-blend-idle](./episodes/ep3.4.3_expression-blend-idle/) |
+| ep3.4.4 | 感情ラベルが体を動かす — joy で弾んで、surprise で揺れる仕組み | Pillow | [ep3.4.4_emotion-action](./episodes/ep3.4.4_emotion-action/) |
 
 ---
 
@@ -46,6 +48,7 @@
 | [WSL2 メモリクラッシュと .wslconfig](./notes/wsl2-memory-crash-and-wslconfig.md) | Wav2Lip 処理中の WSL2 VM クラッシュを .wslconfig で根本解決した記録 |
 | [リップシンクツール選定: 映像出力型 vs データ出力型](./notes/lipsync-data-vs-video-output.md) | Rhubarb vs Wav2Lip — 既存パイプラインへの統合コストが変わる設計の考え方 |
 | [CPU・アニメ向けリップシンクツール調査記録](./notes/cpu-anime-lipsync-tool-survey.md) | THA4・MuseTalk・LatentSync・Rhubarb を比較した選定記録と教訓 |
+| [感情連動アニメーションの設計](./notes/emotion-driven-animation.md) | 感情ラベルから体の動きを決める設計と「既存の sin 波を流用する」実装パターン |
 
 ---
 
