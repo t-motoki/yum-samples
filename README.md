@@ -29,6 +29,7 @@
 | ep3.4.2 | CPU・無料でアニメキャラの口を動かす — Rhubarb Lip Sync 調査記録 | Rhubarb Lip Sync | [ep3.4.2_rhubarb-lipsync](./episodes/ep3.4.2_rhubarb-lipsync/) |
 | ep3.4.3 | 口だけ動いて体が固まる問題 — 表情補間とアイドルアニメーションで人形感を解消する | Pillow | [ep3.4.3_expression-blend-idle](./episodes/ep3.4.3_expression-blend-idle/) |
 | ep3.4.4 | 感情ラベルが体を動かす — joy で弾んで、surprise で揺れる仕組み | Pillow | [ep3.4.4_emotion-action](./episodes/ep3.4.4_emotion-action/) |
+| ep3.5.1 | シーンの切れ目が気になっていた — 台本1行で全シーンにフェードトランジションを適用する | MoviePy | [ep3.5.1_fade-transition](./episodes/ep3.5.1_fade-transition/) |
 
 ---
 
@@ -49,6 +50,7 @@
 | [リップシンクツール選定: 映像出力型 vs データ出力型](./notes/lipsync-data-vs-video-output.md) | Rhubarb vs Wav2Lip — 既存パイプラインへの統合コストが変わる設計の考え方 |
 | [CPU・アニメ向けリップシンクツール調査記録](./notes/cpu-anime-lipsync-tool-survey.md) | THA4・MuseTalk・LatentSync・Rhubarb を比較した選定記録と教訓 |
 | [感情連動アニメーションの設計](./notes/emotion-driven-animation.md) | 感情ラベルから体の動きを決める設計と「既存の sin 波を流用する」実装パターン |
+| [crossfade で音声がずれる問題と解決策](./notes/crossfade-audio-timing.md) | MoviePy の padding=-tr_sec が音声 duration を変えないために起きるズレと、CompositeAudioClip による無音バッファの付け方 |
 
 ---
 
