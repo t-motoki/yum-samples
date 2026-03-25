@@ -30,6 +30,8 @@
 | ep3.4.3 | 口だけ動いて体が固まる問題 — 表情補間とアイドルアニメーションで人形感を解消する | Pillow | [ep3.4.3_expression-blend-idle](./episodes/ep3.4.3_expression-blend-idle/) |
 | ep3.4.4 | 感情ラベルが体を動かす — joy で弾んで、surprise で揺れる仕組み | Pillow | [ep3.4.4_emotion-action](./episodes/ep3.4.4_emotion-action/) |
 | ep3.5.1 | シーンの切れ目が気になっていた — 台本1行で全シーンにフェードトランジションを適用する | MoviePy | [ep3.5.1_fade-transition](./episodes/ep3.5.1_fade-transition/) |
+| ep3.5.2 | 怒ると揺れて、悲しむと沈む — 感情ごとに動きが変わる仕組みを作った | Pillow | [ep3.5.2_emotion-actions-extended](./episodes/ep3.5.2_emotion-actions-extended/) |
+| ep3.5.3 | zoom ディレクティブ — 任意のシーンに「寄り・引き」をつける | Pillow | [ep3.5.3_zoom-directive](./episodes/ep3.5.3_zoom-directive/) |
 
 ---
 
