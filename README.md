@@ -56,6 +56,7 @@
 | [感情アクション拡張: 振れ幅・周波数・累積で区別する](./notes/emotion-animation-parameter-design.md) | 同じ方向の動きが増えたときに方向以外の軸（振れ幅・周波数・累積型）で感情を区別する設計パターン |
 | [clip-relative time vs scene-elapsed time](./notes/clip-relative-time-vs-scene-elapsed.md) | アニメーション関数で「何を起点とした時刻か」を使い分ける設計判断 |
 | [ディレクティブのスコープ設計](./notes/directive-scope-design.md) | 台本ディレクティブが「どこまで影響するか」を per-clip 追跡で制御する設計パターン |
+| [ffmpeg xfade で音声がずれる問題と解決策](./notes/ffmpeg-xfade-audio-concat.md) | filter_complex で累積ストリームに atrim すると後半が消える問題と、個別 atrim + 多入力 concat による修正 |
 
 ---
 
