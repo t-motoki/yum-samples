@@ -32,6 +32,7 @@
 | ep3.5.1 | シーンの切れ目が気になっていた — 台本1行で全シーンにフェードトランジションを適用する | MoviePy | [ep3.5.1_fade-transition](./episodes/ep3.5.1_fade-transition/) |
 | ep3.5.2 | 怒ると揺れて、悲しむと沈む — 感情ごとに動きが変わる仕組みを作った | Pillow | [ep3.5.2_emotion-actions-extended](./episodes/ep3.5.2_emotion-actions-extended/) |
 | ep3.5.3 | zoom ディレクティブ — 任意のシーンに「寄り・引き」をつける | Pillow | [ep3.5.3_zoom-directive](./episodes/ep3.5.3_zoom-directive/) |
+| ep3.5.4 | カメラワーク演出 — パン・Ken Burns・画面シェイクを台本から制御する | Pillow | [ep3.5.4_camera-work](./episodes/ep3.5.4_camera-work/) |
 
 ---
 
@@ -57,6 +58,7 @@
 | [clip-relative time vs scene-elapsed time](./notes/clip-relative-time-vs-scene-elapsed.md) | アニメーション関数で「何を起点とした時刻か」を使い分ける設計判断 |
 | [ディレクティブのスコープ設計](./notes/directive-scope-design.md) | 台本ディレクティブが「どこまで影響するか」を per-clip 追跡で制御する設計パターン |
 | [ffmpeg xfade で音声がずれる問題と解決策](./notes/ffmpeg-xfade-audio-concat.md) | filter_complex で累積ストリームに atrim すると後半が消える問題と、個別 atrim + 多入力 concat による修正 |
+| [カメラワークディレクティブの設計](./notes/camera-work-directives.md) | 拡大クロップでフレームサイズ不変のまま移動・elapsed 分離・非整数比率シェイクの設計パターン |
 
 ---
 
