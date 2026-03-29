@@ -60,6 +60,8 @@
 | [ディレクティブのスコープ設計](./notes/directive-scope-design.md) | 台本ディレクティブが「どこまで影響するか」を per-clip 追跡で制御する設計パターン |
 | [ffmpeg xfade で音声がずれる問題と解決策](./notes/ffmpeg-xfade-audio-concat.md) | filter_complex で累積ストリームに atrim すると後半が消える問題と、個別 atrim + 多入力 concat による修正 |
 | [カメラワークディレクティブの設計](./notes/camera-work-directives.md) | 拡大クロップでフレームサイズ不変のまま移動・elapsed 分離・非整数比率シェイクの設計パターン |
+| [SE と BGM を独立したフローで処理する設計](./notes/se-bgm-independent-mixing.md) | CompositeAudioClip（シーン内）と ffmpeg amix（最終出力）を分離して SE と BGM の干渉をなくす |
+| [動画生成時にチャプタータイムスタンプを記録する設計](./notes/chapter-timestamps-from-generation.md) | WAV 合計からの後計算はずれる — 生成プロセス内で chapters.json を出力する設計と教訓 |
 
 ---
 
