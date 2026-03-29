@@ -33,6 +33,7 @@
 | ep3.5.2 | 怒ると揺れて、悲しむと沈む — 感情ごとに動きが変わる仕組みを作った | Pillow | [ep3.5.2_emotion-actions-extended](./episodes/ep3.5.2_emotion-actions-extended/) |
 | ep3.5.3 | zoom ディレクティブ — 任意のシーンに「寄り・引き」をつける | Pillow | [ep3.5.3_zoom-directive](./episodes/ep3.5.3_zoom-directive/) |
 | ep3.5.4 | カメラワーク演出 — パン・Ken Burns・画面シェイクを台本から制御する | Pillow | [ep3.5.4_camera-work](./episodes/ep3.5.4_camera-work/) |
+| ep3.5.5 | 台本に1行書くだけで効果音を鳴らせるようにした | MoviePy | [ep3.5.5_se-directive](./episodes/ep3.5.5_se-directive/) |
 
 ---
 
