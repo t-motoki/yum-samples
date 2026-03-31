@@ -62,6 +62,7 @@
 | [カメラワークディレクティブの設計](./notes/camera-work-directives.md) | 拡大クロップでフレームサイズ不変のまま移動・elapsed 分離・非整数比率シェイクの設計パターン |
 | [SE と BGM を独立したフローで処理する設計](./notes/se-bgm-independent-mixing.md) | CompositeAudioClip（シーン内）と ffmpeg amix（最終出力）を分離して SE と BGM の干渉をなくす |
 | [動画生成時にチャプタータイムスタンプを記録する設計](./notes/chapter-timestamps-from-generation.md) | WAV 合計からの後計算はずれる — 生成プロセス内で chapters.json を出力する設計と教訓 |
+| [PiP オーバーレイ設計](./notes/pip-overlay-design.md) | 台本1行でスクリーン録画をアバターシーンに重ねる — Phase 3b 後処理・テロップ非重複クランプ・amix 音声ミックスの設計パターン |
 
 ---
 
