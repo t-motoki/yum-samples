@@ -34,6 +34,7 @@
 | ep3.5.3 | zoom ディレクティブ — 任意のシーンに「寄り・引き」をつける | Pillow | [ep3.5.3_zoom-directive](./episodes/ep3.5.3_zoom-directive/) |
 | ep3.5.4 | カメラワーク演出 — パン・Ken Burns・画面シェイクを台本から制御する | Pillow | [ep3.5.4_camera-work](./episodes/ep3.5.4_camera-work/) |
 | ep3.5.5 | 台本に1行書くだけで効果音を鳴らせるようにした | MoviePy | [ep3.5.5_se-directive](./episodes/ep3.5.5_se-directive/) |
+| ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3.6_pip-directive/) |
 
 ---
 
