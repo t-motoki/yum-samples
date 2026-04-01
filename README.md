@@ -35,6 +35,7 @@
 | ep3.5.4 | カメラワーク演出 — パン・Ken Burns・画面シェイクを台本から制御する | Pillow | [ep3.5.4_camera-work](./episodes/ep3.5.4_camera-work/) |
 | ep3.5.5 | 台本に1行書くだけで効果音を鳴らせるようにした | MoviePy | [ep3.5.5_se-directive](./episodes/ep3.5.5_se-directive/) |
 | ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3.6_pip-directive/) |
+| ep3.5.6 | テロップを動かす — 4種類のアニメーションを台本から制御する | Pillow | [ep3.5.6_telop-effect](./episodes/ep3.5.6_telop-effect/) |
 
 ---
 
@@ -66,6 +67,7 @@
 | [PiP オーバーレイ設計](./notes/pip-overlay-design.md) | 台本1行でスクリーン録画をアバターシーンに重ねる — Phase 3b 後処理・テロップ非重複クランプ・amix 音声ミックスの設計パターン。section END-state バグ・local-t 問題・AAC 末尾切れの修正記録も含む |
 | [ショート diagonal レイアウトの設計](./notes/shorts-diagonal-layout.md) | 等サイズ斜め配置スタイルの座標設計・デフォルト変更の判断・chibi 表情との注意点 |
 | [ショートコメディの間（ポーズ）設計](./notes/short-comedy-pacing.md) | 間に意味を持たせる設計・キャラ設定と会話の整合性・creator への制約の渡し方 |
+| [テロップエフェクトアニメーションの設計](./notes/telop-effect-animation.md) | `t` 純粋関数・bounce の位相設計・pill typewriter のガタつき対策・不正値の寛容な扱い |
 
 ---
 
