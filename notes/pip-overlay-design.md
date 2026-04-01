@@ -187,3 +187,60 @@ PiP ファイルが存在しない場合は `stderr` に警告を出してその
 - **`amix` 後は `-c:a copy` 不可**: フィルターを通った音声は PCM になるためコピーではなく再エンコードが必要。`pip_audio=false` のパスでは既存の `-c:a copy` を維持して既存テストを壊さないことが重要
 - **テロップとの共存は「全ポジション統一クランプ」で解決する**: ポジションごとに条件分岐を書くより、`bottom_y_expr` に集約する方が追加ポジション（`center-bottom` 等）にも一貫して適用できる
 - **既存概念との名前衝突に注意**: `clip: pip=true` の `is_pip_scene()` と新しい `pip:` ディレクティブの `is_pip_overlay_scene()` は別概念。命名を明確に分けることで混乱を防いだ
+
+---
+
+## ep3.6 フォローアップ: 実装後に発見したバグ群（2026-04-01）
+
+実装後の本番生成で4つのバグが発覚した。テスト動画では再現しなかった理由も含めて記録する。
+
+### バグ1: section END-state 問題（pip がシーンに反映されない）
+
+**症状**: `intro` シーンで PiP が表示されない。`scene3f` でも PiP が表示されない。
+
+**原因**: `markdown_reader.py` の第1パスで `section["pip"]` はセクション終了時点の `current_pip` を記録していた。`intro` セクション内で `<!-- pip: ... -->` と `<!-- pip: stop -->` が両方あると、セクション END 状態は `None`（stop 後）になる。第2パスで全シーンに `pip=None` が割り当てられた。
+
+**修正**: `current_items` に pip ディレクティブを追加するパターン（`dialogue_avatar_area` と同じ設計）。第2パスで item を順に処理して `section_pip` を更新する。
+
+**なぜテストで見抜けなかったか**: pip-v2 テストスクリプトは各セクションで pip:start か pip:stop のどちらか一方しか持っておらず、「同一セクションに start と stop が共存する」パターンが存在しなかった。
+
+---
+
+### バグ2: video_dialogue_avatar_area の汚染
+
+**症状**: 最初のシーンからアバターが右側に寄っている（`scene3f` の `dialogue_avatar_area=left` が全シーンに適用されていた）。
+
+**原因**: `markdown_reader.py` のセクション内で `dialogue_avatar_area` config が検出されると `video_dialogue_avatar_area`（Video レベルのデフォルト）を上書きしていた。
+
+**修正**: `not current_id`（セクション外）の場合のみ `video_dialogue_avatar_area` を更新する。セクション内では `current_dialogue_avatar_area` のみを変更する。
+
+**なぜテストで見抜けなかったか**: pip-v2 では `scene4` に `dialogue_avatar_area=left` を置いた後に `scene5` で `dialogue_avatar_area=full` にリセットしていた。Video デフォルトが汚染されてもシーン内の上書きで中和されていた。
+
+---
+
+### バグ3: local-t 問題（loop=false z_order=back pip が 0〜Ns をループ）
+
+**症状**: `screen_edit.mp4`（73秒）が 0〜6秒をループし続ける。
+
+**原因**: MoviePy の `_make_frame(t)` は各シーンに対して `t=0` から始まるローカル時刻を渡す。`_draw_pip_overlay_frame()` は `t` をそのまま pip 動画の再生位置として使うため、シーンをまたぐたびに 0 秒に戻ってしまう。
+
+**修正**: 各シーンのチャンク内累積開始時刻 `pip_global_offset` を事前計算してクロージャ経由で `render()` に渡す。`_draw_pip_overlay_frame()` では `global_t = t + pip_global_offset` を pip 動画の再生位置として使う。
+
+**設計の要点**: `pip_global_offset` は `tr_sec_after` も含めて累積する（フェードバッファ分も正しく加算するため）。
+
+---
+
+### バグ4: AAC 末尾音声切れ（pip_audio=true パス）
+
+**症状**: `pip_audio=true` を使うと最後の音声が数十ミリ秒分切れる。`-c:a copy` パスでは発生しない。
+
+**原因**: `amix` を通った後に AAC 再エンコードが走る。AAC は 1024 サンプル（44100Hz で約 23ms）単位でフレームを処理するため、最後の不完全フレームが失われる。
+
+**修正**: `amix` → `[amixed]` → `apad=whole_dur={total_duration}` → `[aout]` の順でパディングを挿入してから `-t` で切る。
+
+```
+[a0][a_pip_gated0]amix=inputs=2:duration=first:dropout_transition=0[amixed];
+[amixed]apad=whole_dur=199.6[aout]
+```
+
+**教訓**: `amix + -c:a aac` の組み合わせでは末尾パディングが必須。`-c:a copy` パスでは不要。

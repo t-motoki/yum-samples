@@ -62,7 +62,9 @@
 | [カメラワークディレクティブの設計](./notes/camera-work-directives.md) | 拡大クロップでフレームサイズ不変のまま移動・elapsed 分離・非整数比率シェイクの設計パターン |
 | [SE と BGM を独立したフローで処理する設計](./notes/se-bgm-independent-mixing.md) | CompositeAudioClip（シーン内）と ffmpeg amix（最終出力）を分離して SE と BGM の干渉をなくす |
 | [動画生成時にチャプタータイムスタンプを記録する設計](./notes/chapter-timestamps-from-generation.md) | WAV 合計からの後計算はずれる — 生成プロセス内で chapters.json を出力する設計と教訓 |
-| [PiP オーバーレイ設計](./notes/pip-overlay-design.md) | 台本1行でスクリーン録画をアバターシーンに重ねる — Phase 3b 後処理・テロップ非重複クランプ・amix 音声ミックスの設計パターン |
+| [PiP オーバーレイ設計](./notes/pip-overlay-design.md) | 台本1行でスクリーン録画をアバターシーンに重ねる — Phase 3b 後処理・テロップ非重複クランプ・amix 音声ミックスの設計パターン。section END-state バグ・local-t 問題・AAC 末尾切れの修正記録も含む |
+| [ショート diagonal レイアウトの設計](./notes/shorts-diagonal-layout.md) | 等サイズ斜め配置スタイルの座標設計・デフォルト変更の判断・chibi 表情との注意点 |
+| [ショートコメディの間（ポーズ）設計](./notes/short-comedy-pacing.md) | 間に意味を持たせる設計・キャラ設定と会話の整合性・creator への制約の渡し方 |
 
 ---
 
