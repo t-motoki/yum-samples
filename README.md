@@ -36,6 +36,7 @@
 | ep3.5.5 | 台本に1行書くだけで効果音を鳴らせるようにした | MoviePy | [ep3.5.5_se-directive](./episodes/ep3.5.5_se-directive/) |
 | ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3.6_pip-directive/) |
 | ep3.5.6 | テロップを動かす — 4種類のアニメーションを台本から制御する | Pillow | [ep3.5.6_telop-effect](./episodes/ep3.5.6_telop-effect/) |
+| ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3.7_char-flip-pip-start/) |
 
 ---
 
