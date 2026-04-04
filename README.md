@@ -38,6 +38,7 @@
 | ep3.5.6 | テロップを動かす — 4種類のアニメーションを台本から制御する | Pillow | [ep3.5.6_telop-effect](./episodes/ep3.5.6_telop-effect/) |
 | ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3.7_char-flip-pip-start/) |
 | shorts: 知らない人が口パクしてる | SadTalker 出力を PiP 背面に重ねる・音声付き1回再生→無音ループ切り替えパターン | SadTalker / ffmpeg | [shorts_jissya-hayakuchi](./episodes/shorts_jissya-hayakuchi/) |
+| ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4.0_life-event-simulator/) |
 
 ---
 
@@ -69,6 +70,7 @@
 | [PiP オーバーレイ設計](./notes/pip-overlay-design.md) | 台本1行でスクリーン録画をアバターシーンに重ねる — Phase 3b 後処理・テロップ非重複クランプ・amix 音声ミックスの設計パターン。section END-state バグ・local-t 問題・AAC 末尾切れの修正記録も含む |
 | [ショート diagonal レイアウトの設計](./notes/shorts-diagonal-layout.md) | 等サイズ斜め配置スタイルの座標設計・デフォルト変更の判断・chibi 表情との注意点 |
 | [ショートコメディの間（ポーズ）設計](./notes/short-comedy-pacing.md) | 間に意味を持たせる設計・キャラ設定と会話の整合性・creator への制約の渡し方 |
+| [Claude Code に要件定義をさせる設計パターン](./notes/claude-code-requirements-definition.md) | 「FP への確認事項を別途まとめて」という指示で AI が自分の限界を自己申告する構造 |
 | [テロップエフェクトアニメーションの設計](./notes/telop-effect-animation.md) | `t` 純粋関数・bounce の位相設計・pill typewriter のガタつき対策・不正値の寛容な扱い |
 | [SE がナレーション長で切り詰められる問題](./notes/se-duration-clipped-by-narration.md) | `with_duration(narration_dur)` が SE を途中で切る原因と、音声・映像両方を max(narration, SE終了時刻) に伸ばす修正 |
 | [idle animation がシーン境界でリセットされる問題](./notes/idle-animation-scene-boundary-reset.md) | clip_t ではなく scene_elapsed を使うことでシーンをまたいで連続したアニメーションを実現する設計判断 |
