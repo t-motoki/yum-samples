@@ -37,6 +37,7 @@
 | ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3.6_pip-directive/) |
 | ep3.5.6 | テロップを動かす — 4種類のアニメーションを台本から制御する | Pillow | [ep3.5.6_telop-effect](./episodes/ep3.5.6_telop-effect/) |
 | ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3.7_char-flip-pip-start/) |
+| shorts: 知らない人が口パクしてる | SadTalker 出力を PiP 背面に重ねる・音声付き1回再生→無音ループ切り替えパターン | SadTalker / ffmpeg | [shorts_jissya-hayakuchi](./episodes/shorts_jissya-hayakuchi/) |
 
 ---
 
