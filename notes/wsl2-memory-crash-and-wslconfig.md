@@ -129,9 +129,9 @@ watch -n 1 free -h
 - **Swap used が増える** = vm.swappiness が機能している証拠
 - **Swap free が 100MB 以下** = 危険水域（次の手: `swap=8GB` に増やす）
 
-### 次の手（vm.swappiness で不十分な場合）
+### 追加対策: swap=8GB 適用（2026-04-09）
 
-`.wslconfig` の swap を増やす:
+vm.swappiness=80 適用後もクラッシュが再発したため、さらに swap を増やした。
 
 ```ini
 [wsl2]
@@ -139,5 +139,13 @@ memory=7GB
 swap=8GB   # 4GB → 8GB
 ```
 
-設定反映は `wsl --shutdown` 後に再起動。
+設定反映は `wsl --shutdown` 後に再起動。  
+適用後の状態: `Swap: 8.0Gi 0B 8.0Gi`（使用量ゼロで開始）
+
+**現在の構成（2026-04-09 時点）:**
+- `memory=7GB`, `swap=8GB`（`.wslconfig`）
+- `vm.swappiness=80`（`/etc/sysctl.conf` 永続化済み）
+
+ep4.1 生成での効果確認中。これでも不十分な場合は `max_workers 4→2` を検討する。
+
 SSDへの書き込みが増えるが、生成ピークを超えるだけなので消耗リスクは現実的に低い。
