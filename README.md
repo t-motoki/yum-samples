@@ -39,6 +39,8 @@
 | ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3.7_char-flip-pip-start/) |
 | shorts: 知らない人が口パクしてる | SadTalker 出力を PiP 背面に重ねる・音声付き1回再生→無音ループ切り替えパターン | SadTalker / ffmpeg | [shorts_jissya-hayakuchi](./episodes/shorts_jissya-hayakuchi/) |
 | ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4.0_life-event-simulator/) |
+| ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4.1_life-event-simulator-impl/) |
+| ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5.0_claude-code-autonomous-reasons/) |
 
 ---
 
@@ -74,6 +76,7 @@
 | [テロップエフェクトアニメーションの設計](./notes/telop-effect-animation.md) | `t` 純粋関数・bounce の位相設計・pill typewriter のガタつき対策・不正値の寛容な扱い |
 | [SE がナレーション長で切り詰められる問題](./notes/se-duration-clipped-by-narration.md) | `with_duration(narration_dur)` が SE を途中で切る原因と、音声・映像両方を max(narration, SE終了時刻) に伸ばす修正 |
 | [idle animation がシーン境界でリセットされる問題](./notes/idle-animation-scene-boundary-reset.md) | clip_t ではなく scene_elapsed を使うことでシーンをまたいで連続したアニメーションを実現する設計判断 |
+| [pause シーンにテロップを表示する](./notes/pause-telop-directive.md) | `<!-- telop: テキスト -->` ディレクティブで pause シーン（ナレーションなし）にテロップを出す設計パターン |
 
 ---
 
