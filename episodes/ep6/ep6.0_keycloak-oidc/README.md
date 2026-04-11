@@ -1,13 +1,15 @@
-# Keycloak OIDC ローカル SSO デモ
+# Keycloak + OIDC ローカル認証デモ
 
 ## 概要
 
-Keycloak 24 と OIDC を使い、ローカル環境だけで SSO（シングルサインオン）を動かすミニマムなデモです。
+Keycloak 24 と OIDC（Authorization Code Flow）を使い、ローカル環境だけで認証を動かすミニマムなデモです。
 外部サービスは不要で、`docker compose up` と `python app.py` だけで完結します。
 
 構成:
 - **Keycloak 24**: IdP（認証サーバー）。Docker で起動
 - **Flask**: OIDC クライアント（Web アプリ）。Authlib を使用
+
+Flask アプリはパスワードを知らない。「Keycloak が認証した」という証明（ID トークン）を受け取るだけ、という構成の最小実装です。
 
 ## 起動手順
 
@@ -52,10 +54,16 @@ ep6.0_keycloak-oidc/
 ├── keycloak/
 │   └── realm-export.json     # レルム設定（起動時に自動インポート）
 ├── app/
-│   ├── app.py                # Flask アプリ本体
+│   ├── app.py                # Flask アプリ本体（OIDC 関係は2か所だけ）
 │   ├── requirements.txt
 │   └── templates/
 │       ├── index.html        # トップページ
 │       └── profile.html      # ログイン後プロフィールページ
 └── README.md
 ```
+
+## 関連エピソード
+
+- ep6.0.1: Keycloak + OIDC — ローカルで動かす認証の話
+- ep6.0.2: Keycloak SSO — 複数アプリ間でセッションを共有する（予定）
+- ep6.0.3: Keycloak SAML — SAMLプロトコルで認証する（予定）
