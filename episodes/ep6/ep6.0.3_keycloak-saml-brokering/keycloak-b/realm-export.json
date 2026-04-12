@@ -1,0 +1,43 @@
+{
+  "realm": "idp",
+  "enabled": true,
+  "sslRequired": "none",
+  "clients": [
+    {
+      "clientId": "http://localhost:8080/realms/demo/broker/saml-idp/endpoint",
+      "name": "Keycloak A (Broker)",
+      "protocol": "saml",
+      "enabled": true,
+      "frontchannelLogout": true,
+      "redirectUris": [
+        "http://localhost:8080/realms/demo/broker/saml-idp/endpoint"
+      ],
+      "attributes": {
+        "saml.assertion.signature": "false",
+        "saml.authnstatement": "true",
+        "saml.client.signature": "false",
+        "saml.force.post.binding": "true",
+        "saml.server.signature": "false",
+        "saml_assertion_consumer_url_post": "http://localhost:8080/realms/demo/broker/saml-idp/endpoint",
+        "saml_single_logout_service_url_post": "http://localhost:8080/realms/demo/broker/saml-idp/endpoint/logout_response"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "samluser",
+      "email": "samluser@example.com",
+      "firstName": "SAML",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

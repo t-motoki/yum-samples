@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Keycloak OIDC デモ</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; }
+    a { color: #0066cc; }
+    .status { padding: 16px; border-radius: 4px; margin-top: 24px; }
+    .logged-in { background: #e8f5e9; border: 1px solid #a5d6a7; }
+    .logged-out { background: #fff3e0; border: 1px solid #ffcc80; }
+  </style>
+</head>
+<body>
+  <h1>Keycloak OIDC デモ</h1>
+
+  {% if user %}
+    <div class="status logged-in">
+      <p>ログイン中: <strong>{{ user.get('name') or user.get('preferred_username') }}</strong></p>
+      <p>
+        <a href="/profile">プロフィールを見る</a> |
+        <a href="/logout">ログアウト</a>
+      </p>
+    </div>
+  {% else %}
+    <div class="status logged-out">
+      <p>ログインしていません</p>
+      <p><a href="/login">ログイン</a></p>
+    </div>
+  {% endif %}
+</body>
+</html>
