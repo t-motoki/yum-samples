@@ -1,0 +1,58 @@
+{
+  "realm": "demo",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": false,
+  "clients": [
+    {
+      "clientId": "flask-app",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "flask-app-secret",
+      "redirectUris": ["http://localhost:5000/callback"],
+      "webOrigins": ["http://localhost:5000"],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:5000/"
+      }
+    },
+    {
+      "clientId": "flask-app-b",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "flask-app-b-secret",
+      "redirectUris": ["http://localhost:5001/callback"],
+      "webOrigins": ["http://localhost:5001"],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:5001/"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "testuser",
+      "email": "testuser@example.com",
+      "firstName": "Test",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}
