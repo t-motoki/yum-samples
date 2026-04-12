@@ -43,6 +43,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4.0_life-event-simulator/) |
 | ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4.1_life-event-simulator-impl/) |
 | ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5.0_claude-code-autonomous-reasons/) |
+| ep6.0 | Keycloak + OIDC — ローカルで動かす認証の話 | Keycloak / Flask / authlib / Docker | [ep6.0_keycloak-oidc](./episodes/ep6/ep6.0_keycloak-oidc/) |
 
 ---
 
@@ -79,6 +80,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | [SE がナレーション長で切り詰められる問題](./notes/se-duration-clipped-by-narration.md) | `with_duration(narration_dur)` が SE を途中で切る原因と、音声・映像両方を max(narration, SE終了時刻) に伸ばす修正 |
 | [idle animation がシーン境界でリセットされる問題](./notes/idle-animation-scene-boundary-reset.md) | clip_t ではなく scene_elapsed を使うことでシーンをまたいで連続したアニメーションを実現する設計判断 |
 | [pause シーンにテロップを表示する](./notes/pause-telop-directive.md) | `<!-- telop: テキスト -->` ディレクティブで pause シーン（ナレーションなし）にテロップを出す設計パターン |
+| [ギャラリー動的切り替えの設計](./notes/gallery-dynamic-switch.md) | セクション内で `<!-- gallery: -->` を複数書いて narration ごとに画像を切り替える設計パターン |
 
 ---
 
