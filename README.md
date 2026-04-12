@@ -44,6 +44,9 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4.1_life-event-simulator-impl/) |
 | ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5.0_claude-code-autonomous-reasons/) |
 | ep6.0 | Keycloak + OIDC — ローカルで動かす認証の話 | Keycloak / Flask / authlib / Docker | [ep6.0_keycloak-oidc](./episodes/ep6/ep6.0_keycloak-oidc/) |
+| ep6.0.2 | Keycloak SSO — 複数アプリで1回ログイン | Keycloak / Flask / Docker | [ep6.0.2_keycloak-sso](./episodes/ep6/ep6.0.2_keycloak-sso/) |
+| ep6.0.3 | Keycloak SAML Brokering — 外部SAMLとOIDCをつなぐ | Keycloak / SAML / Docker | [ep6.0.3_keycloak-saml-brokering](./episodes/ep6/ep6.0.3_keycloak-saml-brokering/) |
+| ep6.0.4 | TypeScriptで書いたら、型がトークンを守っていた | React / TypeScript / Vite / Keycloak / oidc-client-ts | [ep6.0.4_keycloak-react-ts](./episodes/ep6/ep6.0.4_keycloak-react-ts/) |
 
 ---
 
