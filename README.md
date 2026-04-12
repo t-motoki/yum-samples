@@ -18,31 +18,33 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 
 | エピソード | タイトル | 主な技術 | フォルダ |
 | --- | --- | --- | --- |
-| ep0.0 | Pythonとフリーツールだけでアバターを無料で作る | rembg / Pillow | [ep0.0_avatar-creation](./episodes/ep0.0_avatar-creation/) |
-| ep1.0 | アバターを動画に合成してナレーション付き動画を自動生成する | VOICEVOX / Pillow / MoviePy | [ep1.0_avatar-video-synthesis](./episodes/ep1.0_avatar-video-synthesis/) |
-| ep2.0 | IP-Adapterで1枚のアバターから表情バリエーションを生成する（失敗実録） | IP-Adapter / Diffusers | [ep2.0_avatar-variant-generation](./episodes/ep2.0_avatar-variant-generation/) |
-| ep2.1 | 同一キャラクターの表情だけを変える — 表情モーフィング再挑戦 | THA3 / rembg / Pillow | [ep2.1_avatar-expression-morphing](./episodes/ep2.1_avatar-expression-morphing/) |
-| ep3.0 | 紙芝居スタイル動画パイプライン — 台本を書けばゆむが感情豊かに話す仕組みを作る | Pillow / VOICEVOX | [ep3.0_kamishibai-pipeline](./episodes/ep3.0_kamishibai-pipeline/) |
-| ep3.1 | テロップフェードインアニメーション — 静止テロップに「動き」を加える | Pillow / MoviePy | [ep3.1_telop-animation](./episodes/ep3.1_telop-animation/) |
-| ep2.2 | さばきゃん登場 — 聞いてくれる人がいるだけで、こんなに違う | Pillow（2キャラサムネイル）/ VOICEVOX | [ep2.2_sabacyan-introduction](./episodes/ep2.2_sabacyan-introduction/) |
-| ep3.2 | BGMフェードイン・フェードアウト — 台本から音量曲線を制御する | MoviePy | [ep3.2_bgm-fade](./episodes/ep3.2_bgm-fade/) |
-| ep3.3 | Wav2Lip でリップシンク — アニメキャラに口パクをつける | Wav2Lip / PyTorch | [ep3.3_wav2lip-lipsync](./episodes/ep3.3_wav2lip-lipsync/) |
-| ep3.4.1 | AIで静止画を動かす実験、13分待って気づいたこと | SadTalker / PyTorch | [ep3.4.1_sadtalker-cpu](./episodes/ep3.4.1_sadtalker-cpu/) |
-| ep3.4.2 | CPU・無料でアニメキャラの口を動かす — Rhubarb Lip Sync 調査記録 | Rhubarb Lip Sync | [ep3.4.2_rhubarb-lipsync](./episodes/ep3.4.2_rhubarb-lipsync/) |
-| ep3.4.3 | 口だけ動いて体が固まる問題 — 表情補間とアイドルアニメーションで人形感を解消する | Pillow | [ep3.4.3_expression-blend-idle](./episodes/ep3.4.3_expression-blend-idle/) |
-| ep3.4.4 | 感情ラベルが体を動かす — joy で弾んで、surprise で揺れる仕組み | Pillow | [ep3.4.4_emotion-action](./episodes/ep3.4.4_emotion-action/) |
-| ep3.5.1 | シーンの切れ目が気になっていた — 台本1行で全シーンにフェードトランジションを適用する | MoviePy | [ep3.5.1_fade-transition](./episodes/ep3.5.1_fade-transition/) |
-| ep3.5.2 | 怒ると揺れて、悲しむと沈む — 感情ごとに動きが変わる仕組みを作った | Pillow | [ep3.5.2_emotion-actions-extended](./episodes/ep3.5.2_emotion-actions-extended/) |
-| ep3.5.3 | zoom ディレクティブ — 任意のシーンに「寄り・引き」をつける | Pillow | [ep3.5.3_zoom-directive](./episodes/ep3.5.3_zoom-directive/) |
-| ep3.5.4 | カメラワーク演出 — パン・Ken Burns・画面シェイクを台本から制御する | Pillow | [ep3.5.4_camera-work](./episodes/ep3.5.4_camera-work/) |
-| ep3.5.5 | 台本に1行書くだけで効果音を鳴らせるようにした | MoviePy | [ep3.5.5_se-directive](./episodes/ep3.5.5_se-directive/) |
-| ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3.6_pip-directive/) |
-| ep3.5.6 | テロップを動かす — 4種類のアニメーションを台本から制御する | Pillow | [ep3.5.6_telop-effect](./episodes/ep3.5.6_telop-effect/) |
-| ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3.7_char-flip-pip-start/) |
-| shorts: 知らない人が口パクしてる | SadTalker 出力を PiP 背面に重ねる・音声付き1回再生→無音ループ切り替えパターン | SadTalker / ffmpeg | [shorts_jissya-hayakuchi](./episodes/shorts_jissya-hayakuchi/) |
-| ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4.0_life-event-simulator/) |
-| ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4.1_life-event-simulator-impl/) |
-| ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5.0_claude-code-autonomous-reasons/) |
+| ep0.0 | Pythonとフリーツールだけでアバターを無料で作る | rembg / Pillow | [ep0.0_avatar-creation](./episodes/ep0/ep0.0_avatar-creation/) |
+| ep1.0 | アバターを動画に合成してナレーション付き動画を自動生成する | VOICEVOX / Pillow / MoviePy | [ep1.0_avatar-video-synthesis](./episodes/ep1/ep1.0_avatar-video-synthesis/) |
+| ep2.0 | IP-Adapterで1枚のアバターから表情バリエーションを生成する（失敗実録） | IP-Adapter / Diffusers | [ep2.0_avatar-variant-generation](./episodes/ep2/ep2.0_avatar-variant-generation/) |
+| ep2.1 | 同一キャラクターの表情だけを変える — 表情モーフィング再挑戦 | THA3 / rembg / Pillow | [ep2.1_avatar-expression-morphing](./episodes/ep2/ep2.1_avatar-expression-morphing/) |
+| ep2.2 | さばきゃん登場 — 聞いてくれる人がいるだけで、こんなに違う | Pillow（2キャラサムネイル）/ VOICEVOX | [ep2.2_sabacyan-introduction](./episodes/ep2/ep2.2_sabacyan-introduction/) |
+| ep2.3 | ゆむのアバターを全部作り直した話 — Bing Image Creator でキャラ絵を作るときのプロンプトの考え方 | Bing Image Creator | [ep2.3_yumu-avatar-renewal](./episodes/ep2/ep2.3_yumu-avatar-renewal/) |
+| ep3.0 | 紙芝居スタイル動画パイプライン — 台本を書けばゆむが感情豊かに話す仕組みを作る | Pillow / VOICEVOX | [ep3.0_kamishibai-pipeline](./episodes/ep3/ep3.0_kamishibai-pipeline/) |
+| ep3.1 | テロップフェードインアニメーション — 静止テロップに「動き」を加える | Pillow / MoviePy | [ep3.1_telop-animation](./episodes/ep3/ep3.1_telop-animation/) |
+| ep3.2 | BGMフェードイン・フェードアウト — 台本から音量曲線を制御する | MoviePy | [ep3.2_bgm-fade](./episodes/ep3/ep3.2_bgm-fade/) |
+| ep3.3 | Wav2Lip でリップシンク — アニメキャラに口パクをつける | Wav2Lip / PyTorch | [ep3.3_wav2lip-lipsync](./episodes/ep3/ep3.3_wav2lip-lipsync/) |
+| ep3.4.1 | AIで静止画を動かす実験、13分待って気づいたこと | SadTalker / PyTorch | [ep3.4.1_sadtalker-cpu](./episodes/ep3/ep3.4.1_sadtalker-cpu/) |
+| ep3.4.2 | CPU・無料でアニメキャラの口を動かす — Rhubarb Lip Sync 調査記録 | Rhubarb Lip Sync | [ep3.4.2_rhubarb-lipsync](./episodes/ep3/ep3.4.2_rhubarb-lipsync/) |
+| ep3.4.3 | 口だけ動いて体が固まる問題 — 表情補間とアイドルアニメーションで人形感を解消する | Pillow | [ep3.4.3_expression-blend-idle](./episodes/ep3/ep3.4.3_expression-blend-idle/) |
+| ep3.4.4 | 感情ラベルが体を動かす — joy で弾んで、surprise で揺れる仕組み | Pillow | [ep3.4.4_emotion-action](./episodes/ep3/ep3.4.4_emotion-action/) |
+| ep3.5.1 | シーンの切れ目が気になっていた — 台本1行で全シーンにフェードトランジションを適用する | MoviePy | [ep3.5.1_fade-transition](./episodes/ep3/ep3.5.1_fade-transition/) |
+| ep3.5.2 | 怒ると揺れて、悲しむと沈む — 感情ごとに動きが変わる仕組みを作った | Pillow | [ep3.5.2_emotion-actions-extended](./episodes/ep3/ep3.5.2_emotion-actions-extended/) |
+| ep3.5.3 | zoom ディレクティブ — 任意のシーンに「寄り・引き」をつける | Pillow | [ep3.5.3_zoom-directive](./episodes/ep3/ep3.5.3_zoom-directive/) |
+| ep3.5.4 | カメラワーク演出 — パン・Ken Burns・画面シェイクを台本から制御する | Pillow | [ep3.5.4_camera-work](./episodes/ep3/ep3.5.4_camera-work/) |
+| ep3.5.5 | 台本に1行書くだけで効果音を鳴らせるようにした | MoviePy | [ep3.5.5_se-directive](./episodes/ep3/ep3.5.5_se-directive/) |
+| ep3.5.6 | テロップを動かす — 4種類のアニメーションを台本から制御する | Pillow | [ep3.5.6_telop-effect](./episodes/ep3/ep3.5.6_telop-effect/) |
+| ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3/ep3.6_pip-directive/) |
+| ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3/ep3.7_char-flip-pip-start/) |
+| shorts: 知らない人が口パクしてる | SadTalker 出力を PiP 背面に重ねる・音声付き1回再生→無音ループ切り替えパターン | SadTalker / ffmpeg | [shorts_jissya-hayakuchi](./shorts/shorts_jissya-hayakuchi/) |
+| ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4/ep4.0_life-event-simulator/) |
+| ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4/ep4.1_life-event-simulator-impl/) |
+| ep4.2 | ライフイベント家計シミュレーター — 動いた。でもFPが触ったら、渡せなかった | Claude Code / Python | [ep4.2_life-event-simulator-first-review](./episodes/ep4/ep4.2_life-event-simulator-first-review/) |
+| ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5/ep5.0_claude-code-autonomous-reasons/) |
 | ep6.0 | Keycloak + OIDC — ローカルで動かす認証の話 | Keycloak / Flask / authlib / Docker | [ep6.0_keycloak-oidc](./episodes/ep6/ep6.0_keycloak-oidc/) |
 | ep6.0.2 | Keycloak SSO — 複数アプリで1回ログイン | Keycloak / Flask / Docker | [ep6.0.2_keycloak-sso](./episodes/ep6/ep6.0.2_keycloak-sso/) |
 | ep6.0.3 | Keycloak SAML Brokering — 外部SAMLとOIDCをつなぐ | Keycloak / SAML / Docker | [ep6.0.3_keycloak-saml-brokering](./episodes/ep6/ep6.0.3_keycloak-saml-brokering/) |
