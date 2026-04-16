@@ -44,6 +44,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4/ep4.0_life-event-simulator/) |
 | ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4/ep4.1_life-event-simulator-impl/) |
 | ep4.2 | ライフイベント家計シミュレーター — 動いた。でもFPが触ったら、渡せなかった | Claude Code / Python | [ep4.2_life-event-simulator-first-review](./episodes/ep4/ep4.2_life-event-simulator-first-review/) |
+| ep4.3 | 形を変えよう — FP向けWebアプリへ | Claude Code / FastAPI / React / Vite | [ep4.3_life-event-simulator-webapp](./episodes/ep4/ep4.3_life-event-simulator-webapp/) |
 | ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5/ep5.0_claude-code-autonomous-reasons/) |
 | ep6.0 | Keycloak + OIDC — ローカルで動かす認証の話 | Keycloak / Flask / authlib / Docker | [ep6.0_keycloak-oidc](./episodes/ep6/ep6.0_keycloak-oidc/) |
 | ep6.0.2 | Keycloak SSO — 複数アプリで1回ログイン | Keycloak / Flask / Docker | [ep6.0.2_keycloak-sso](./episodes/ep6/ep6.0.2_keycloak-sso/) |
