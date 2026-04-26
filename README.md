@@ -46,6 +46,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | ep4.2 | ライフイベント家計シミュレーター — 動いた。でもFPが触ったら、渡せなかった | Claude Code / Python | [ep4.2_life-event-simulator-first-review](./episodes/ep4/ep4.2_life-event-simulator-first-review/) |
 | ep4.3 | 形を変えよう — FP向けWebアプリへ | Claude Code / FastAPI / React / Vite | [ep4.3_life-event-simulator-webapp](./episodes/ep4/ep4.3_life-event-simulator-webapp/) |
 | ep5.0 | Claude Codeが自律的に動けた理由 — CLAUDE.md・スキル・ガードレール3つの仕掛け | Claude Code | [ep5.0_claude-code-autonomous-reasons](./episodes/ep5/ep5.0_claude-code-autonomous-reasons/) |
+| ep5.2 | hooks — 書き方を変えると、動き方が変わる | Claude Code hooks | [ep5.2_hooks](./episodes/ep5/ep5.2_hooks/) |
 | ep6.0 | Keycloak + OIDC — ローカルで動かす認証の話 | Keycloak / Flask / authlib / Docker | [ep6.0_keycloak-oidc](./episodes/ep6/ep6.0_keycloak-oidc/) |
 | ep6.0.2 | Keycloak SSO — 複数アプリで1回ログイン | Keycloak / Flask / Docker | [ep6.0.2_keycloak-sso](./episodes/ep6/ep6.0.2_keycloak-sso/) |
 | ep6.0.3 | Keycloak SAML Brokering — 外部SAMLとOIDCをつなぐ | Keycloak / SAML / Docker | [ep6.0.3_keycloak-saml-brokering](./episodes/ep6/ep6.0.3_keycloak-saml-brokering/) |
@@ -87,6 +88,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | [idle animation がシーン境界でリセットされる問題](./notes/idle-animation-scene-boundary-reset.md) | clip_t ではなく scene_elapsed を使うことでシーンをまたいで連続したアニメーションを実現する設計判断 |
 | [pause シーンにテロップを表示する](./notes/pause-telop-directive.md) | `<!-- telop: テキスト -->` ディレクティブで pause シーン（ナレーションなし）にテロップを出す設計パターン |
 | [ギャラリー動的切り替えの設計](./notes/gallery-dynamic-switch.md) | セクション内で `<!-- gallery: -->` を複数書いて narration ごとに画像を切り替える設計パターン |
+| [Claude Code hooks 設計パターン](./notes/claude-code-hooks-design.md) | PreToolUse で変更前にブロック・PostToolUse で自動テスト — CLAUDE.md との使い分けと落とし穴 |
 
 ---
 
