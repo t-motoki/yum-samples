@@ -1,0 +1,62 @@
+{
+  "realm": "demo",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": false,
+  "clients": [
+    {
+      "clientId": "flask-app",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "flask-app-secret",
+      "redirectUris": ["http://localhost:5000/callback"],
+      "webOrigins": ["http://localhost:5000"],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:5000/"
+      }
+    }
+  ],
+  "identityProviders": [
+    {
+      "alias": "saml-idp",
+      "displayName": "External SAML IdP (Keycloak B)",
+      "providerId": "saml",
+      "enabled": true,
+      "trustEmail": true,
+      "firstBrokerLoginFlowAlias": "first broker login",
+      "config": {
+        "entityId": "http://localhost:8081/realms/idp",
+        "singleSignOnServiceUrl": "http://localhost:8081/realms/idp/protocol/saml",
+        "singleLogoutServiceUrl": "http://localhost:8081/realms/idp/protocol/saml",
+        "nameIDPolicyFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent",
+        "principalType": "SUBJECT",
+        "validateSignature": "false",
+        "wantAuthnRequestsSigned": "false",
+        "postBindingResponse": "true",
+        "postBindingAuthnRequest": "true",
+        "postBindingLogout": "true",
+        "syncMode": "IMPORT"
+      }
+    }
+  ],
+  "identityProviderMappers": [
+    {
+      "name": "email-mapper",
+      "identityProviderAlias": "saml-idp",
+      "identityProviderMapper": "saml-user-attribute-idp-mapper",
+      "config": {
+        "syncMode": "INHERIT",
+        "attribute": "email",
+        "user.attribute": "email"
+      }
+    }
+  ]
+}

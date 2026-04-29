@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>App B — Keycloak SSO デモ</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; }
+    a { color: #0066cc; }
+    .status { padding: 16px; border-radius: 4px; margin-top: 24px; }
+    .logged-in { background: #e8f5e9; border: 1px solid #a5d6a7; }
+    .logged-out { background: #fff3e0; border: 1px solid #ffcc80; }
+    .other-app { margin-top: 32px; padding: 12px 16px; background: #f5f5f5; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>App B <small style="font-size: 0.6em; color: #888;">:5001</small></h1>
+
+  {% if user %}
+    <div class="status logged-in">
+      <p>ログイン中: <strong>{{ user.get('name') or user.get('preferred_username') }}</strong></p>
+      <p>
+        <a href="/profile">プロフィールを見る</a> |
+        <a href="/logout">ログアウト</a>
+      </p>
+    </div>
+  {% else %}
+    <div class="status logged-out">
+      <p>ログインしていません</p>
+      <p><a href="/login">ログイン</a></p>
+    </div>
+  {% endif %}
+
+  <div class="other-app">
+    <p>SSO を確認する → <a href="http://localhost:5000" target="_blank">App A を開く（http://localhost:5000）</a></p>
+    <p style="font-size: 0.85em; color: #666;">App B でログイン済みなら、App A で「ログイン」を押しても Keycloak の認証画面が出ません。</p>
+  </div>
+</body>
+</html>
