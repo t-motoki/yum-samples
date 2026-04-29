@@ -1,0 +1,22 @@
+{
+  "name": "ep6.1-zoom-ai-agent",
+  "version": "1.0.0",
+  "description": "Zoom AI エージェント Electron サンプルアプリ",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "jest --testPathPattern=tests/"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@zoom/meetingsdk": "^6.0.0",
+    "dotenv": "^16.0.0",
+    "electron": "^34.0.0",
+    "express": "^4.18.0",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "supertest": "^7.0.0"
+  }
+}
