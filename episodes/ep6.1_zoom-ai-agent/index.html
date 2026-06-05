@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoom AI エージェント</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #4fc3f7;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      color: #90caf9;
+    }
+
+    input {
+      width: 320px;
+      padding: 8px 12px;
+      background: #2a2a4a;
+      border: 1px solid #3a3a6a;
+      border-radius: 4px;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #4fc3f7;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 10px 28px;
+      background: #0288d1;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0277bd;
+    }
+
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+
+    #log-area {
+      margin-top: 24px;
+    }
+
+    #log-area h2 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #90caf9;
+    }
+
+    #log {
+      background: #0d0d1a;
+      border: 1px solid #3a3a6a;
+      border-radius: 4px;
+      padding: 12px;
+      height: 300px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+    }
+
+    .log-entry {
+      padding: 2px 0;
+      line-height: 1.6;
+    }
+
+    .log-entry.receive {
+      color: #a5d6a7;
+    }
+
+    .log-entry.send {
+      color: #80deea;
+    }
+
+    .log-entry.info {
+      color: #fff59d;
+    }
+
+    .log-entry.error {
+      color: #ef9a9a;
+    }
+
+    #zoom-container {
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Zoom AI エージェント</h1>
+
+  <div class="form-group">
+    <label for="meeting-number">ミーティング番号</label>
+    <input type="text" id="meeting-number" placeholder="123 456 7890" />
+  </div>
+
+  <div class="form-group">
+    <label for="password">パスワード</label>
+    <input type="password" id="password" placeholder="ミーティングパスワード" />
+  </div>
+
+  <div class="form-group">
+    <label for="display-name">表示名</label>
+    <input type="text" id="display-name" value="AI Agent" />
+  </div>
+
+  <button id="join-btn" onclick="joinMeeting()">参加</button>
+
+  <div id="log-area">
+    <h2>ログ</h2>
+    <div id="log"></div>
+  </div>
+
+  <div id="zoom-container"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
