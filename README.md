@@ -41,6 +41,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | ep3.6 | スクリーン録画をアバター解説に重ねる — PiP ディレクティブで台本から制御する | Pillow / MoviePy / ffmpeg | [ep3.6_pip-directive](./episodes/ep3/ep3.6_pip-directive/) |
 | ep3.7 | シーン単位でキャラの向きを変える / PiP の再生開始位置を指定する | Pillow / ffmpeg | [ep3.7_char-flip-pip-start](./episodes/ep3/ep3.7_char-flip-pip-start/) |
 | shorts: 知らない人が口パクしてる | SadTalker 出力を PiP 背面に重ねる・音声付き1回再生→無音ループ切り替えパターン | SadTalker / ffmpeg | [shorts_jissya-hayakuchi](./shorts/shorts_jissya-hayakuchi/) |
+| shorts: AIに目的だけ伝えた。30秒で動くアプリが出てきた。 | 額面時給と拘束時給の差を見せる単一HTMLツール — 計算ロジックを純粋関数に分離し UI とテストが同一実装を共有。外部依存ゼロ・file:// で動く | HTML / JavaScript | [ai-30sec-app](./shorts/ai-30sec-app/) |
 | ep4.0 | FP の困りごとを Claude Code に要件定義させる — 使ったプロンプトと生成された要件書 | Claude Code | [ep4.0_life-event-simulator](./episodes/ep4/ep4.0_life-event-simulator/) |
 | ep4.1 | Claude Code で実装・FP 実務で検証する — ライフイベント家計シミュレーター実装編 | Claude Code / Python | [ep4.1_life-event-simulator-impl](./episodes/ep4/ep4.1_life-event-simulator-impl/) |
 | ep4.2 | ライフイベント家計シミュレーター — 動いた。でもFPが触ったら、渡せなかった | Claude Code / Python | [ep4.2_life-event-simulator-first-review](./episodes/ep4/ep4.2_life-event-simulator-first-review/) |

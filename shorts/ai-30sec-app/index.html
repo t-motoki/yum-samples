@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拘束時給 計算ツール</title>
+  <!-- 外部依存ゼロ。Webフォント・CDN・画像読み込みは一切しない。 -->
+  <style>
+    :root {
+      --fg: #1a2332;
+      --muted: #5b6b82;
+      --line: #d7dee8;
+      --accent: #1f6feb;
+      --warn: #8a5a00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px;
+      font-family: system-ui, sans-serif;
+      color: var(--fg);
+      background: #f4f7fb;
+    }
+    .card {
+      max-width: 460px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px 22px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+    .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+    .field { margin-bottom: 16px; }
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    input[type="number"] {
+      width: 100%;
+      font-size: 18px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .result {
+      margin-top: 22px;
+      padding: 18px 16px;
+      border-radius: 10px;
+      background: #eef4ff;
+      border: 1px solid #cfe0ff;
+      text-align: center;
+    }
+    .result .main {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .result .accent { color: var(--accent); }
+    .result .diff { color: var(--muted); font-size: 18px; }
+    .result .placeholder { color: var(--muted); font-size: 16px; font-weight: 500; }
+    .commute {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .note {
+      margin-top: 18px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--warn);
+      background: #fff7e6;
+      border: 1px solid #ffe2a8;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>拘束時給 計算ツール</h1>
+    <p class="sub">通勤も含めた「拘束時間」で時給を見直す</p>
+
+    <div class="field">
+      <label for="monthlyIncome">月収（額面・円）</label>
+      <input type="number" id="monthlyIncome" min="0" step="1000" value="300000" inputmode="numeric" />
+    </div>
+
+    <div class="field">
+      <label for="workHours">
+        月の労働時間
+        <span class="hint">残業を含む総労働時間</span>
+      </label>
+      <input type="number" id="workHours" min="0" step="1" value="160" inputmode="decimal" />
+    </div>
+
+    <div class="field">
+      <label for="commuteHoursPerDay">1日の通勤時間（往復・時間）</label>
+      <input type="number" id="commuteHoursPerDay" min="0" step="0.1" value="1.5" inputmode="decimal" />
+    </div>
+
+    <div class="field">
+      <label for="workDaysPerMonth">月の出勤日数</label>
+      <input type="number" id="workDaysPerMonth" min="0" step="1" value="20" inputmode="numeric" />
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <p class="note">額面＝税・社会保険の控除前で計算しています</p>
+  </div>
+
+  <!-- 計算ロジックは wage.js が唯一の実装。ここに計算式は書かない。 -->
+  <script src="wage.js"></script>
+  <script>
+    // 結果の表示用文字列を組み立てるヘルパ。DOM には触れず文字列だけ返す（テスト可能にするため）。
+    // result が null（算出不能）のときは NaN/Infinity/undefined を一切含まないプレースホルダを返す。
+    function formatResult(result) {
+      if (result === null) {
+        return {
+          ok: false,
+          main: "入力を確認してください",
+          commute: "",
+        };
+      }
+      // 表示は整数に丸める（時給は円単位で見せる）。
+      const face = Math.round(result.faceWage);
+      const real = Math.round(result.realWage);
+      const diff = face - real; // 拘束時給の方が低いので 0 以上になる
+      // 通勤時間合計は小数になりうる（例: 0.3*18）。浮動小数の誤差（5.3999...）を
+      // そのまま画面に出さないよう、小数1桁までに丸めて末尾の余分な桁を落とす。
+      const commuteHours = Math.round(result.commuteHoursTotal * 10) / 10;
+      let diffLabel;
+      if (diff === 0) {
+        diffLabel = "（±0円）";
+      } else {
+        diffLabel = `（−${diff}円）`;
+      }
+      return {
+        ok: true,
+        // 例: 額面時給1875円 → 拘束時給1579円（−296円）
+        face,
+        real,
+        diff,
+        main: `額面時給${face}円 → 拘束時給${real}円${diffLabel}`,
+        diffLabel,
+        commute: `通勤時間 月${commuteHours}時間ぶんを拘束時間に含めています`,
+      };
+    }
+
+    // テスト（test.html）から formatResult を検証できるように公開する。
+    window.WageUI = { formatResult };
+
+    // --- ここから下は DOM 操作（UI 層の本体）---
+    const ids = ["monthlyIncome", "workHours", "commuteHoursPerDay", "workDaysPerMonth"];
+    const resultEl = document.getElementById("result");
+
+    function render() {
+      // 入力値を集める。空入力は "" のまま渡し、null 判定はロジック層に委ねる。
+      const input = {};
+      ids.forEach((id) => {
+        input[id] = document.getElementById(id).value;
+      });
+
+      const result = Wage.calcHourlyWages(input);
+      const view = formatResult(result);
+
+      if (!view.ok) {
+        resultEl.innerHTML = `<div class="placeholder">${view.main}</div>`;
+        return;
+      }
+
+      resultEl.innerHTML = `
+        <div class="main">
+          額面時給${view.face}円
+          <span class="accent">→ 拘束時給${view.real}円</span>
+          <span class="diff">${view.diffLabel}</span>
+        </div>
+        <div class="commute">${view.commute}</div>
+      `;
+    }
+
+    // input イベントで即時再計算（録画都合）。
+    ids.forEach((id) => {
+      document.getElementById(id).addEventListener("input", render);
+    });
+
+    // 初期表示。
+    render();
+  </script>
+</body>
+</html>

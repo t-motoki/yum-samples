@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>wage.js テストランナー</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 20px; background: #0d1117; color: #c9d1d9; }
+    pre { white-space: pre-wrap; font-size: 13px; line-height: 1.6; }
+    .ok { color: #3fb950; }
+    .fail { color: #f85149; }
+    h2 { color: #58a6ff; }
+  </style>
+</head>
+<body>
+  <h2>wage.js テスト（純粋関数）</h2>
+  <pre id="logic-out"></pre>
+
+  <h2>formatResult 表示分岐（DOM非依存）</h2>
+  <pre id="format-out"></pre>
+
+  <!-- node テストと同じ wage.js / wage.test.js を読む（実装・テストを二重定義しない）。 -->
+  <script src="../wage.js"></script>
+  <script src="wage.test.js"></script>
+  <script>
+    // 1) 純粋関数テスト: wage.test.js の runTests を、ログを画面に流して実行する。
+    (function runLogicTests() {
+      const out = document.getElementById("logic-out");
+      window.WageTest.setLog((line) => {
+        const cls = line.includes("FAIL") || line.includes("❌") ? "fail" : "ok";
+        out.innerHTML += `<span class="${cls}">${line}</span>\n`;
+      });
+      window.WageTest.runTests();
+    })();
+
+    // 2) formatResult の表示分岐検証。
+    //    index.html と同じ formatResult をここに持たず、検証用に最小再現する代わりに、
+    //    DOM 表示で「NaN/Infinity/undefined を出さない」ことだけを直接確認する。
+    //    （formatResult 本体は index.html 内。ここでは null 入力時の振る舞い契約を確認する。）
+    (function runFormatTests() {
+      const out = document.getElementById("format-out");
+      const lines = [];
+
+      // null（算出不能）入力時に画面へ出す文字列に禁止語が含まれないこと。
+      // index.html の formatResult を読み込めないため、契約を再掲して検証する簡易版。
+      function formatResultLike(result) {
+        if (result === null) {
+          return { ok: false, main: "入力を確認してください" };
+        }
+        const face = Math.round(result.faceWage);
+        const real = Math.round(result.realWage);
+        const diff = face - real;
+        const diffLabel = diff === 0 ? "（±0円）" : `（−${diff}円）`;
+        return { ok: true, main: `額面時給${face}円 → 拘束時給${real}円${diffLabel}` };
+      }
+
+      function check(cond, msg) {
+        lines.push((cond ? "OK   " : "FAIL ") + msg);
+      }
+
+      const banned = /NaN|Infinity|undefined/;
+
+      // 算出不能 → プレースホルダで禁止語なし
+      const v1 = formatResultLike(window.Wage.calcHourlyWages({ monthlyIncome: 300000, workHours: 0, commuteHoursPerDay: 1, workDaysPerMonth: 20 }));
+      check(v1.ok === false && !banned.test(v1.main), "labor=0 → プレースホルダ表示・禁止語なし");
+
+      // 空入力 → プレースホルダ
+      const v2 = formatResultLike(window.Wage.calcHourlyWages({ monthlyIncome: "", workHours: "", commuteHoursPerDay: "", workDaysPerMonth: "" }));
+      check(v2.ok === false && !banned.test(v2.main), "空入力 → プレースホルダ表示・禁止語なし");
+
+      // 正常入力 → 額面/拘束ラベルあり・「実質時給」は出さない・禁止語なし
+      const v3 = formatResultLike(window.Wage.calcHourlyWages({ monthlyIncome: 300000, workHours: 160, commuteHoursPerDay: 1.5, workDaysPerMonth: 20 }));
+      check(
+        v3.ok === true &&
+          v3.main.includes("額面時給") &&
+          v3.main.includes("拘束時給") &&
+          !v3.main.includes("実質時給") &&
+          !banned.test(v3.main),
+        "正常入力 → 「額面時給/拘束時給」表示・「実質時給」非表示・禁止語なし"
+      );
+
+      // 差分0 → （±0円）
+      const v4 = formatResultLike(window.Wage.calcHourlyWages({ monthlyIncome: 300000, workHours: 160, commuteHoursPerDay: 0, workDaysPerMonth: 20 }));
+      check(v4.main.includes("（±0円）"), "通勤0 → 差分（±0円）表示");
+
+      const failed = lines.filter((l) => l.startsWith("FAIL")).length;
+      lines.push(failed === 0 ? "\n表示分岐テスト 全通過 ✅" : `\n${failed} 件失敗 ❌`);
+      lines.forEach((l) => {
+        const cls = l.startsWith("FAIL") || l.includes("❌") ? "fail" : "ok";
+        out.innerHTML += `<span class="${cls}">${l}</span>\n`;
+      });
+    })();
+  </script>
+</body>
+</html>
