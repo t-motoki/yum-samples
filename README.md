@@ -53,6 +53,7 @@ AIがコードを書く時代に、エンジニアの仕事はどう変わるの
 | ep6.0.2 | Keycloak SSO — 複数アプリで1回ログイン | Keycloak / Flask / Docker | [ep6.0.2_keycloak-sso](./episodes/ep6/ep6.0.2_keycloak-sso/) |
 | ep6.0.3 | Keycloak SAML Brokering — 外部SAMLとOIDCをつなぐ | Keycloak / SAML / Docker | [ep6.0.3_keycloak-saml-brokering](./episodes/ep6/ep6.0.3_keycloak-saml-brokering/) |
 | ep6.0.4 | TypeScriptで書いたら、型がトークンを守っていた | React / TypeScript / Vite / Keycloak / oidc-client-ts | [ep6.0.4_keycloak-react-ts](./episodes/ep6/ep6.0.4_keycloak-react-ts/) |
+| ep7.0 | AIはテストを絶対視する — 割り勘計算で確かめた再現デモ | Node.js / Jest / ESLint / tsc | [ep7.0_ai-test-kakikae](./episodes/ep7/ep7.0_ai-test-kakikae/) |
 
 ---
 

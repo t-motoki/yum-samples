@@ -1,0 +1,6 @@
+# apparatus には node_modules を置かない（scripts は node 標準のみ）。
+# 万一ローカルに生成されても追跡しない。
+node_modules/
+
+# workspace はリポジトリ外に materialize する想定。もし apparatus 配下に出した場合も追跡しない。
+/workspace/

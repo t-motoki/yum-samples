@@ -1,0 +1,24 @@
+{
+  "_header": "AI作業対象外・独立オラクル（held-out）。SPEC.md から人手で導出した期待値。src/kaikei.js の出力から生成してはいけない（生成するとバグや取り決めを追認してしまう）。作業ツリーの検査（test/lint/typecheck）には含めない。",
+  "representative": [
+    { "total": 1000, "n": 3, "expected": [334, 333, 333] },
+    { "total": 1000, "n": 4, "expected": [250, 250, 250, 250] },
+    { "total": 1001, "n": 3, "expected": [334, 334, 333] },
+    { "total": 999, "n": 4, "expected": [250, 250, 250, 249] },
+    { "total": 7, "n": 3, "expected": [3, 2, 2] }
+  ],
+  "properties": {
+    "conservation": "sum(splitBill(total, n)) === total",
+    "fairness": "max(parts) - min(parts) <= 1",
+    "length": "splitBill(total, n).length === n",
+    "nonNegativeInteger": "every part is an integer >= 0"
+  },
+  "propertyCases": [
+    { "total": 1000, "n": 3 },
+    { "total": 1000, "n": 7 },
+    { "total": 12345, "n": 11 },
+    { "total": 100, "n": 6 },
+    { "total": 5, "n": 5 },
+    { "total": 0, "n": 3 }
+  ]
+}

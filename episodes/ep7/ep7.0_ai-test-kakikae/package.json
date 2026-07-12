@@ -1,0 +1,12 @@
+{
+  "name": "ep7.0-apparatus",
+  "version": "2.0.0",
+  "description": "ep7.0 再現デモの装置（apparatus）。2ポールを workspace へ実体化・独立オラクルで検証する。AIには見せない。",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "materialize": "node scripts/materialize.mjs",
+    "apply:context": "node scripts/apply-context.mjs",
+    "verify:oracle": "node scripts/verify-oracle.mjs"
+  }
+}
